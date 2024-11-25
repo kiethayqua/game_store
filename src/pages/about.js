@@ -1,95 +1,78 @@
-import Image from "next/image";
-import styles from "../app/page.module.css";
+import React from "react";
+import { Box, Typography, Grid, Card, CardContent, Avatar } from "@mui/material";
 
-export default function About() {
+const teamMembers = [
+    {
+        name: "Kiệt Nguyễn (Steve)",
+        role: "Developer",
+        avatar: "https://via.placeholder.com/150", // Replace with actual avatar URL
+        description: "A Fullstack software engineer with a passion for mobile app development",
+    },
+    {
+        name: "Kim Ngân",
+        role: "Developer",
+        avatar: "https://via.placeholder.com/150", // Replace with actual avatar URL
+        description: "",
+    },
+    {
+        name: "Dũng Nguyễn",
+        role: "Developer",
+        avatar: "https://via.placeholder.com/150", // Replace with actual avatar URL
+        description: "",
+    },
+];
+
+const AboutUs = () => {
     return (
-        <div className={styles.page}>
-            <main className={styles.main}>
-                <Image
-                    className={styles.logo}
-                    src="/next.svg"
-                    alt="Next.js logo"
-                    width={180}
-                    height={38}
-                    priority
-                />
-                <ol>
-                    <li>
-                        Get started by editing <code>src/app/page.js</code>.
-                    </li>
-                    <li>Save and see your changes instantly.</li>
-                </ol>
-
-                <div className={styles.ctas}>
-                    <a
-                        className={styles.primary}
-                        href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Image
-                            className={styles.logo}
-                            src="/vercel.svg"
-                            alt="Vercel logomark"
-                            width={20}
-                            height={20}
-                        />
-                        Deploy now
-                    </a>
-                    <a
-                        href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.secondary}
-                    >
-                        Read our docs
-                    </a>
-                </div>
-            </main>
-            <footer className={styles.footer}>
-                <a
-                    href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image
-                        aria-hidden
-                        src="/file.svg"
-                        alt="File icon"
-                        width={16}
-                        height={16}
-                    />
-                    Learn
-                </a>
-                <a
-                    href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image
-                        aria-hidden
-                        src="/window.svg"
-                        alt="Window icon"
-                        width={16}
-                        height={16}
-                    />
-                    Examples
-                </a>
-                <a
-                    href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Image
-                        aria-hidden
-                        src="/globe.svg"
-                        alt="Globe icon"
-                        width={16}
-                        height={16}
-                    />
-                    Go to nextjs.org →
-                </a>
-            </footer>
-        </div>
+        <Box
+            sx={{
+                px: 4,
+                py: 8,
+                backgroundColor: "#f5f5f5",
+                textAlign: "center",
+            }}
+        >
+            <Typography variant="h4" gutterBottom>
+                Về chúng tôi
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+                Chúng tôi cam kết cung cấp trải nghiệm tốt nhất cho người dùng.
+            </Typography>
+            <Grid container spacing={4} justifyContent="center" sx={{ mt: 4 }}>
+                {teamMembers.map((member, index) => (
+                    <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Card elevation={3} sx={{ borderRadius: 2 }}>
+                            <CardContent>
+                                <Avatar
+                                    alt={member.name}
+                                    src={member.avatar}
+                                    sx={{
+                                        width: 100,
+                                        height: 100,
+                                        mx: "auto",
+                                        mb: 2,
+                                    }}
+                                />
+                                <Typography variant="h6" gutterBottom>
+                                    {member.name}
+                                </Typography>
+                                <Typography
+                                    variant="subtitle2"
+                                    color="textSecondary"
+                                    gutterBottom
+                                >
+                                    {member.role}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    {member.description}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+        </Box>
     );
-}
+};
+
+export default AboutUs;

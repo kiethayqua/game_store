@@ -10,13 +10,18 @@ import page3 from '../mock/page3.json';
 import page4 from '../mock/page4.json';
 import page5 from '../mock/page5.json';
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const pages = ['Liên hệ'];
+const pages = [{
+  title: 'Về chúng tôi',
+  route: '/about'
+}];
 
 export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [popupData, setPopupData] = useState(null);
+  const router = useRouter();
 
   const getGames = async (page = 1) => {
     setLoading(true);
@@ -87,10 +92,13 @@ export default function Home() {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <Button
-                  key={page}
+                  key={page.title}
                   sx={{ my: 2, color: 'white', display: 'block' }}
+                  onClick={() => {
+                    router.push(page.route)
+                  }}
                 >
-                  {page}
+                  {page.title}
                 </Button>
               ))}
             </Box>
@@ -117,8 +125,8 @@ export default function Home() {
                   </Typography>
                 </CardContent>
                 <CardActions sx={{ justifyContent: 'flex-end' }}>
-                  <Button startIcon={<InfoIcon />} variant="outlined" size="small" onClick={() => { onDetail(game) }}>Chi Tiết</Button>
-                  <Button startIcon={<ShoppingCartIcon />} variant="contained" size="small">Mua Game</Button>
+                  <Button startIcon={<InfoIcon />} variant="outlined" size="small" onClick={() => { onDetail(game) }}>Lưu ý</Button>
+                  <Button onClick={() => { router.push('/payment') }} startIcon={<ShoppingCartIcon />} variant="contained" size="small">Mua Game</Button>
                 </CardActions>
               </Card>
             </Grid>
